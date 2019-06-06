@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 '''#Leer archivo 'nodos'
-file = open ('Entregables/nodos.txt','r')
+file = open ('nodos.txt','r')
 nodes = file.readline()
 print("cantidad de nodos:", nodes)
 file.close()'''
@@ -14,7 +14,7 @@ file.close()'''
 G = nx.DiGraph()
 
 #Agregar arcos desde archivo txt
-G=nx.read_edgelist("Entregables/arcos.txt",nodetype=int, data=(('weight',int),),create_using=nx.DiGraph())
+G=nx.read_edgelist("arcos.txt",nodetype=int, data=(('weight',int),),create_using=nx.DiGraph())
 
 '''
 #Visualizar la red
