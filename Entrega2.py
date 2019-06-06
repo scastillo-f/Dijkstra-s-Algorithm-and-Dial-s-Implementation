@@ -16,11 +16,12 @@ G = nx.DiGraph()
 #Agregar arcos desde archivo txt
 G=nx.read_edgelist("Entregables/arcos.txt",nodetype=int, data=(('weight',int),),create_using=nx.DiGraph())
 
+'''
 #Visualizar la red
 plt.subplot(121)
 nx.draw(G, with_labels=True, font_weight='bold')
 plt.show()
-
+'''
 
 #Utilizando algoritmo Dijkstra Original
 def Dijkstra(G,s):
@@ -69,7 +70,6 @@ def Dial_Dijkstra(G,s):
     bucket_list = ['' for i in range(costo_max*n)]
     bucket_list[0]=s
     etiq=0
-    lista_etiq=[0]
     while len(np.unique(bucket_list))>1:
         nodo=bucket_list[etiq]
         if nodo != '':
@@ -80,9 +80,7 @@ def Dial_Dijkstra(G,s):
                     bucket_list[peso]=i
                     distancias[i-1]=peso
                     predecesor[i-1]=nodo
-                
             etiq=0
-            print(bucket_list)
         else:
             etiq=etiq+1
             
@@ -100,7 +98,7 @@ s = int(input("Introduzca nodo fuente:") )
 start_time= time()
 df1 = Dijkstra(G,s) 
 final_time= time()
-ejecution_time_1 = float('inf') #final_time - start_time 
+ejecution_time_1 = final_time - start_time 
 
 start_time= time()
 df2 = Dial_Dijkstra(G,s)
@@ -114,8 +112,10 @@ file.write(str(s))
 if ejecution_time_1 < ejecution_time_2:
     print("Solucion entregada con algoritmo Dijkstra")
     print("Tiempo de ejecucion final:",ejecution_time_1)
+    print("Tiempo de ejecucion final de algoritmo de Dial:",ejecution_time_2)
     np.savetxt(r'salida.txt', df1.values, fmt='%d',header=str(s),comments='')
 else:
     print("Solucion entregada con implementación Dial del algoritmo Dijkstra")
     print("Tiempo de ejecucion final:",ejecution_time_2)
+    print("Tiempo de ejecucion final de algoritmo Dijkstra:",ejecution_time_1)
     np.savetxt(r'salida.txt', df2.values, fmt='%d',header=str(s),comments='')
